@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour {
 	public Text scoreText;
 	public Text restartText;
 	public Text gameOverText;
+	public GameObject restartButton;
+	
 	private int score;
 	private bool gameOver;
 	private bool restart;
@@ -25,6 +27,7 @@ public class GameController : MonoBehaviour {
 		restart = false;
 		restartText.text = "";
 		gameOverText.text = "";
+		restartButton.SetActive(false);
 		score = 0;
 		UpdateScore();
 		StartCoroutine (SpawnWaves ());
@@ -36,7 +39,7 @@ public class GameController : MonoBehaviour {
 		{
 			if (Input.GetKeyDown(KeyCode.R))
 			{
-				SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+				
 			}
 		}
 	}
@@ -77,7 +80,13 @@ public class GameController : MonoBehaviour {
 	{
 		gameOverText.text = "Game Over!";
 		gameOver = true;
-		restartText.text = "Press 'R' for Restart";
+		restartButton.SetActive(true);
+		//restartText.text = "Press 'R' for Restart";
 		restart = true;
+	}
+
+	public void RestartGame()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 }
